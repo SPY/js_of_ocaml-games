@@ -1,0 +1,20 @@
+interface Actor {
+};
+
+[Constructor(long x, long y, long width, long height)]
+interface Rectangle : Actor {
+};
+
+[Constructor(long x, long y, long width, long height, DOMString url)]
+interface Texture : Actor {
+};
+
+[Constructor]
+interface Group : Actor {
+  void addChild(Actor child);
+};
+
+interface Engine {
+  static void render();
+  static void addToRoot(Actor child);
+};
