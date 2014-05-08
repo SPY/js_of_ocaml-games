@@ -2,8 +2,9 @@ var ACTORS = {
     RECT: 1,
     GROUP: 2,
     TEXTURE: 3
-}
+};
 
+(function(win) {
 function Actor(type) {
     this.type = type;
 }
@@ -99,21 +100,20 @@ var Render = {
     }
 };
 
-var root = create_group();
 
-function create_rect(x, y, w, h) {
+win.create_rect = function create_rect(x, y, w, h) {
     return Render.addActor(new rect(x, y, w, h));
 }
 
-function create_group() {
+win.create_group = function create_group() {
     return Render.addActor(new group());
 }
 
-function create_texture(x, y, w, h, url) {
+win.create_texture = function create_texture(x, y, w, h, url) {
     return Render.addActor(new texture(x, y, w, h, url));
 }
 
-function add_to_group(groupId, actorId) {
+win.add_to_group = function add_to_group(groupId, actorId) {
     var group = Render.getById(groupId);
     var actor = Render.getById(actorId);
     if (group && actor) {
@@ -121,6 +121,10 @@ function add_to_group(groupId, actorId) {
     }
 }
 
-function tick() {
+win.tick = function tick() {
     Render.render();
 }
+
+var root = win.root = win.create_group();
+
+})(typeof window != 'undefined' ? window : global);
