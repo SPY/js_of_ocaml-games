@@ -82,22 +82,24 @@ var Render = {
     getById: function(id) {
         return this.actors[id];
     },
+    removeById: function(id) {
+        delete this.actors[id];
+    },
     addActor: function(actor) {
         var id = this.currentId++;
         this.actors[id] = actor;
         return id;
     },
     render: function() {
-        console.log('render');
         if (this.ctx == null) {
             this.ctx = createContext();
         }
         this.ctx.clearRect(0, 0, 800, 600);
-        Object.keys(this.actors).forEach(function(id) {
-            this.actors[id].render(this.ctx);
-        }.bind(this));
+        this.getById(root).render(this.ctx);
     }
 };
+
+var root = create_group();
 
 function create_rect(x, y, w, h) {
     return Render.addActor(new rect(x, y, w, h));
