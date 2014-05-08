@@ -79,6 +79,9 @@ var Render = {
     actors: {},
     ctx: undefined,
     // public
+    getById: function(id) {
+        return this.actors[id];
+    },
     addActor: function(actor) {
         var id = this.currentId++;
         this.actors[id] = actor;
@@ -96,3 +99,26 @@ var Render = {
     }
 };
 
+function create_rect(x, y, w, h) {
+    return Render.addActor(new rect(x, y, w, h));
+}
+
+function create_group() {
+    return Render.addActor(new group());
+}
+
+function create_texture(x, y, w, h, url) {
+    return Render.addActor(new texture(x, y, w, h, url));
+}
+
+function add_to_group(groupId, actorId) {
+    var group = Render.getById(groupId);
+    var actor = Render.getById(actorId);
+    if (group && actor) {
+        group.addChild(actor);
+    }
+}
+
+function tick() {
+    Render.render();
+}

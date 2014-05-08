@@ -3,4 +3,4 @@ concat_js:
 	cat js/js_scenario.js >> all.js
 
 node: concat_js
-	node all.js
+	node all.js > js.log
