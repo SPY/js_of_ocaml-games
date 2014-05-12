@@ -35,3 +35,7 @@ let tick () : unit =
   Unsafe.fun_call (Unsafe.variable "tick") [| |]
 
 let root: actor_id = Unsafe.variable "root"
+
+let console_log s : unit = 
+  Unsafe.fun_call (Unsafe.variable "console.log")
+    [|Unsafe.inject (string s)|]

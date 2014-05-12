@@ -18,3 +18,5 @@ interface Engine {
   static void render();
   static void addToRoot(Actor child);
 };
+
+engine implements Engine;
